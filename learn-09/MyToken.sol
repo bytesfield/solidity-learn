@@ -29,7 +29,7 @@ contract BytesToken is ERC20 {
     );
 
     /**
-     * @dev Total supply of the token.
+     * @dev Token's the current total supply in circulation
      *
      */
     function totalSupply() public pure returns (uint256 _totalSupply) {
@@ -37,7 +37,7 @@ contract BytesToken is ERC20 {
     }
 
     /**
-     * @dev Returns balance of an address.
+     * @dev Returns balance of an address (keeps track of the balance in each user wallet).
      *
      * @param _addr   The address whose balance will be returned.
      * @return balance Balance of the address.
@@ -47,7 +47,7 @@ contract BytesToken is ERC20 {
     }
 
     /**
-     * @dev Transfer the specified amount of tokens to the specified address.
+     * @dev Owner Transfer a specified amount of tokens to a specified address.
      *
      * @param _to    Receiver address.
      * @param _value Amount of tokens that will be transferred.
@@ -71,7 +71,8 @@ contract BytesToken is ERC20 {
     }
 
     /**
-     * @dev Transfer the specified amount of tokens from sender address to the specified address.
+     * @dev Allows a smart contract to automate the transfer process and 
+     * send a given amount of the token on behalf of the owner
      *
      * @param _from   Sender address.
      * @param _to    Receiver address.
@@ -104,7 +105,14 @@ contract BytesToken is ERC20 {
         return false;
     }
 
-    //Owner address approves an address with a value to spend
+    /**
+     * @dev Owner address approves an address with a value to spend
+     *
+     * @param _spender   Spender address.
+     * @param _value Amount of tokens that will be transferred.
+     
+     * @return  success
+     */
     function approve(address _spender, uint256 _value)
         public
         returns (bool success)
@@ -113,7 +121,14 @@ contract BytesToken is ERC20 {
         return true;
     }
 
-    //An owner address adds an address to allowance
+    /**
+     * @dev An owner address adds an address to allowance
+     *
+     * @param _owner   Owner address.
+     * @param _spender   Spender address.
+     
+     * @return remaining
+     */
     function allowance(address _owner, address _spender)
         public
         view
@@ -125,8 +140,8 @@ contract BytesToken is ERC20 {
     /**
      * @dev Checks if balance is sufficient.
      *
-     * @param  _amount   amount.
-     * @param  _balance    Address balance.
+     * @param  _amount  amount.
+     * @param  _balance Address balance.
      
      */
     function sufficientBalance(uint256 _amount, uint256 _balance) private pure {
